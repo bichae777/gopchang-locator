@@ -1,0 +1,4 @@
+*.ipynb filter=nbstripout
+*.ipynb diff=ipynb
+*.ipynb merge=ours
+data/processed/seoul_gopchang_master.csv filter=lfs diff=lfs merge=lfs -text

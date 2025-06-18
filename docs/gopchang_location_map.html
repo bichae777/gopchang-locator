@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_841f4f0e4b9b73f68f13f07a47596d13 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 600.0px;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; 
+     bottom: 50px; left: 50px; width: 190px; height: 160px; 
+     background-color: white; border:2px solid grey; z-index:9999; 
+     font-size:12px; padding: 12px;
+     box-shadow: 0 0 15px rgba(0,0,0,0.3);
+     border-radius: 8px;">
+
+<h4 style="margin: 0 0 12px 0; text-align: center; color: #333;">🍖 곱창집 적합도 등급</h4>
+<div style="line-height: 1.8;">
+    <div style="margin: 4px 0;">
+        <i style="background:red; width:14px; height:14px; float:left; margin:3px 8px 0 0; border-radius:50%; border: 1px solid #999;"></i>
+        <span style="font-weight: bold;">최우수</span> (40점 이상)
+    </div>
+    <div style="margin: 4px 0;">
+        <i style="background:orange; width:14px; height:14px; float:left; margin:3px 8px 0 0; border-radius:50%; border: 1px solid #999;"></i>
+        <span style="font-weight: bold;">우수</span> (35-40점)
+    </div>
+    <div style="margin: 4px 0;">
+        <i style="background:yellow; width:14px; height:14px; float:left; margin:3px 8px 0 0; border-radius:50%; border: 1px solid #999;"></i>
+        <span style="font-weight: bold;">양호</span> (30-35점)
+    </div>
+    <div style="margin: 4px 0;">
+        <i style="background:green; width:14px; height:14px; float:left; margin:3px 8px 0 0; border-radius:50%; border: 1px solid #999;"></i>
+        <span style="font-weight: bold;">보통</span> (25-30점)
+    </div>
+    <div style="margin: 4px 0;">
+        <i style="background:blue; width:14px; height:14px; float:left; margin:3px 8px 0 0; border-radius:50%; border: 1px solid #999;"></i>
+        <span style="font-weight: bold;">기타</span> (25점 미만)
+    </div>
+</div>
+</div>
+    
+            <div class="folium-map" id="map_841f4f0e4b9b73f68f13f07a47596d13" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_841f4f0e4b9b73f68f13f07a47596d13 = L.map(
+                "map_841f4f0e4b9b73f68f13f07a47596d13",
+                {
+                    center: [37.5665, 126.978],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_590fdcabe55576bfd76b9187af538a58 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_590fdcabe55576bfd76b9187af538a58.addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+            var circle_marker_09d56f6125d03a9d18b822d84a8fb479 = L.circleMarker(
+                [37.4979, 127.0276],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.718158238194214, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_6610fae605eef69fdab2199959197115 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_bb74e92cddfe706e979cc0dceabb8da8 = $(`<div id="html_bb74e92cddfe706e979cc0dceabb8da8" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 1: 강남역         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 46.8점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 2,521,295명<br>                 💰 <b>한식매출:</b> 564.4억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 4197억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>100점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>8점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>40점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>34점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_6610fae605eef69fdab2199959197115.setContent(html_bb74e92cddfe706e979cc0dceabb8da8);
+            
+        
+
+        circle_marker_09d56f6125d03a9d18b822d84a8fb479.bindPopup(popup_6610fae605eef69fdab2199959197115)
+        ;
+
+        
+    
+    
+            circle_marker_09d56f6125d03a9d18b822d84a8fb479.bindTooltip(
+                `<div>
+                     🏆 TOP 1: 강남역<br>📊 적합도: 46.8점<br>🌙 야간유동: 2,521,295명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c4ea144d84a812f16e5b5e2989346ad2 = L.circleMarker(
+                [37.5703, 126.991],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.05373202089899, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_aa2c388e38ae19c2c9b11c0fa5543408 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_febe88891d2944a34b7e2fbf903806c5 = $(`<div id="html_febe88891d2944a34b7e2fbf903806c5" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 2: 종로?청계 관광특구         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 40.1점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 2,253,271명<br>                 💰 <b>한식매출:</b> 450.4억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 2312억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>89점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>7점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>22점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>30점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_aa2c388e38ae19c2c9b11c0fa5543408.setContent(html_febe88891d2944a34b7e2fbf903806c5);
+            
+        
+
+        circle_marker_c4ea144d84a812f16e5b5e2989346ad2.bindPopup(popup_aa2c388e38ae19c2c9b11c0fa5543408)
+        ;
+
+        
+    
+    
+            circle_marker_c4ea144d84a812f16e5b5e2989346ad2.bindTooltip(
+                `<div>
+                     🏆 TOP 2: 종로?청계 관광특구<br>📊 적합도: 40.1점<br>🌙 야간유동: 2,253,271명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_652664523da9669a89650e67311ed002 = L.circleMarker(
+                [37.5636, 126.9831],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.509795056808326, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_b070a368fa60f33ff8d59074beccac20 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_2c0b420d1d563e82f667325ee1dd5335 = $(`<div id="html_2c0b420d1d563e82f667325ee1dd5335" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 3: 명동 남대문 북창동 다동 무교동 관광특구         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 38.8점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,657,878명<br>                 💰 <b>한식매출:</b> 1056.3억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 4525억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>65점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>23점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>43점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>18점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_b070a368fa60f33ff8d59074beccac20.setContent(html_2c0b420d1d563e82f667325ee1dd5335);
+            
+        
+
+        circle_marker_652664523da9669a89650e67311ed002.bindPopup(popup_b070a368fa60f33ff8d59074beccac20)
+        ;
+
+        
+    
+    
+            circle_marker_652664523da9669a89650e67311ed002.bindTooltip(
+                `<div>
+                     🏆 TOP 3: 명동 남대문 북창동 다동 무교동 관광특구<br>📊 적합도: 38.8점<br>🌙 야간유동: 1,657,878명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2a6428b1d950db144b87975743a108cf = L.circleMarker(
+                [37.5547, 126.9366],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.247669653987707, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_c8501da56b2e8f76e7ef7d9e8f62eb2a = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_08147b043a68f267608efd619ac3c00b = $(`<div id="html_08147b043a68f267608efd619ac3c00b" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 4: 신촌역(신촌역, 신촌로터리)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 38.1점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 2,150,525명<br>                 💰 <b>한식매출:</b> 200.0억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 933억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>85점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>3점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>9점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>51점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_c8501da56b2e8f76e7ef7d9e8f62eb2a.setContent(html_08147b043a68f267608efd619ac3c00b);
+            
+        
+
+        circle_marker_2a6428b1d950db144b87975743a108cf.bindPopup(popup_c8501da56b2e8f76e7ef7d9e8f62eb2a)
+        ;
+
+        
+    
+    
+            circle_marker_2a6428b1d950db144b87975743a108cf.bindTooltip(
+                `<div>
+                     🏆 TOP 4: 신촌역(신촌역, 신촌로터리)<br>📊 적합도: 38.1점<br>🌙 야간유동: 2,150,525명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2e616704eb65c700fc79fc98f2ec9aef = L.circleMarker(
+                [37.5703, 126.991],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.628005194309546, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_c8a2c568485068148bee86bc6b709eb4 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_1a20b69b69ca65b4b6f4b75f555b770a = $(`<div id="html_1a20b69b69ca65b4b6f4b75f555b770a" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 5: 종로3가역         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 36.6점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,775,563명<br>                 💰 <b>한식매출:</b> 350.1억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 3243억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>70점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>7점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>31점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>39점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_c8a2c568485068148bee86bc6b709eb4.setContent(html_1a20b69b69ca65b4b6f4b75f555b770a);
+            
+        
+
+        circle_marker_2e616704eb65c700fc79fc98f2ec9aef.bindPopup(popup_c8a2c568485068148bee86bc6b709eb4)
+        ;
+
+        
+    
+    
+            circle_marker_2e616704eb65c700fc79fc98f2ec9aef.bindTooltip(
+                `<div>
+                     🏆 TOP 5: 종로3가역<br>📊 적합도: 36.6점<br>🌙 야간유동: 1,775,563명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2f6a94a8b290f865acd305c40fa4c617 = L.circleMarker(
+                [37.5568, 126.9236],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.199264273944301, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_3dda11622806153f4f8444fc502868c3 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_7f1bb8713d27e57a042227679a6b946c = $(`<div id="html_7f1bb8713d27e57a042227679a6b946c" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 6: 홍대입구역(홍대)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 35.5점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,624,245명<br>                 💰 <b>한식매출:</b> 278.5억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 1491억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>64점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>6점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>14점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>74점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_3dda11622806153f4f8444fc502868c3.setContent(html_7f1bb8713d27e57a042227679a6b946c);
+            
+        
+
+        circle_marker_2f6a94a8b290f865acd305c40fa4c617.bindPopup(popup_3dda11622806153f4f8444fc502868c3)
+        ;
+
+        
+    
+    
+            circle_marker_2f6a94a8b290f865acd305c40fa4c617.bindTooltip(
+                `<div>
+                     🏆 TOP 6: 홍대입구역(홍대)<br>📊 적합도: 35.5점<br>🌙 야간유동: 1,624,245명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3992c904b64c6e038f77f5d4e28f988d = L.circleMarker(
+                [37.5139, 126.9425],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.072202812446754, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_1efcdb3848cc611bc9d446a4e21f8b9f = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c847faaa855b1c6cba7b2d78f8036744 = $(`<div id="html_c847faaa855b1c6cba7b2d78f8036744" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 7: 노량진역(노량진)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 35.2점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 540,307명<br>                 💰 <b>한식매출:</b> 220.8억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 10419억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>20점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>15점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>100점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>53점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_1efcdb3848cc611bc9d446a4e21f8b9f.setContent(html_c847faaa855b1c6cba7b2d78f8036744);
+            
+        
+
+        circle_marker_3992c904b64c6e038f77f5d4e28f988d.bindPopup(popup_1efcdb3848cc611bc9d446a4e21f8b9f)
+        ;
+
+        
+    
+    
+            circle_marker_3992c904b64c6e038f77f5d4e28f988d.bindTooltip(
+                `<div>
+                     🏆 TOP 7: 노량진역(노량진)<br>📊 적합도: 35.2점<br>🌙 야간유동: 540,307명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2e63144151cfda6595dccdde42663cfa = L.circleMarker(
+                [37.6542, 127.0621],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.592493600574535, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_93be61a55b04e1d334dc65e06f36f5b1 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_11d6fd1450a7887b6f17bdc74a111be9 = $(`<div id="html_11d6fd1450a7887b6f17bdc74a111be9" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 8: 노원역         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 34.0점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,713,961명<br>                 💰 <b>한식매출:</b> 286.3억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 1334억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>67점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>6점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>13점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>50점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_93be61a55b04e1d334dc65e06f36f5b1.setContent(html_11d6fd1450a7887b6f17bdc74a111be9);
+            
+        
+
+        circle_marker_2e63144151cfda6595dccdde42663cfa.bindPopup(popup_93be61a55b04e1d334dc65e06f36f5b1)
+        ;
+
+        
+    
+    
+            circle_marker_2e63144151cfda6595dccdde42663cfa.bindTooltip(
+                `<div>
+                     🏆 TOP 8: 노원역<br>📊 적합도: 34.0점<br>🌙 야간유동: 1,713,961명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cba87599b99571b11f2548a0dbf7af60 = L.circleMarker(
+                [37.5133, 127.1028],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.592333142374123, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_6bd2b6c34143e6bcf2a72c0f195476a9 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ad3c3eba935252af9272876081572b07 = $(`<div id="html_ad3c3eba935252af9272876081572b07" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 9: 잠실 관광특구         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 34.0점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,376,101명<br>                 💰 <b>한식매출:</b> 312.5억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 3554억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>54점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>8점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>34점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>54점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_6bd2b6c34143e6bcf2a72c0f195476a9.setContent(html_ad3c3eba935252af9272876081572b07);
+            
+        
+
+        circle_marker_cba87599b99571b11f2548a0dbf7af60.bindPopup(popup_6bd2b6c34143e6bcf2a72c0f195476a9)
+        ;
+
+        
+    
+    
+            circle_marker_cba87599b99571b11f2548a0dbf7af60.bindTooltip(
+                `<div>
+                     🏆 TOP 9: 잠실 관광특구<br>📊 적합도: 34.0점<br>🌙 야간유동: 1,376,101명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b743110f13e69050ef36b62a04e54ab3 = L.circleMarker(
+                [37.529, 126.9173],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.054320507672836, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_be2f413c56087a172a2ec2e690a7bfa6 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_6c21e33c22ba39f46aa2f46442393d12 = $(`<div id="html_6c21e33c22ba39f46aa2f46442393d12" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 10: 국회의사당역(국회의사당)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 32.6점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 89,475명<br>                 💰 <b>한식매출:</b> 252.0억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 704억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>2점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>100점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>7점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>8점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_be2f413c56087a172a2ec2e690a7bfa6.setContent(html_6c21e33c22ba39f46aa2f46442393d12);
+            
+        
+
+        circle_marker_b743110f13e69050ef36b62a04e54ab3.bindPopup(popup_be2f413c56087a172a2ec2e690a7bfa6)
+        ;
+
+        
+    
+    
+            circle_marker_b743110f13e69050ef36b62a04e54ab3.bindTooltip(
+                `<div>
+                     🏆 TOP 10: 국회의사당역(국회의사당)<br>📊 적합도: 32.6점<br>🌙 야간유동: 89,475명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2640603aba4d862b07903ad5bf89b984 = L.circleMarker(
+                [37.5602, 126.9264],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.054009622064507, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_747ad794d6657d51820cc1d843ee06ec = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_3c5f8ffa2df8143e99280555939b8d60 = $(`<div id="html_3c5f8ffa2df8143e99280555939b8d60" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 11: 연남동(홍대)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 32.6점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,698,353명<br>                 💰 <b>한식매출:</b> 156.4억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 684억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>67점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>3점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>7점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>55점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_747ad794d6657d51820cc1d843ee06ec.setContent(html_3c5f8ffa2df8143e99280555939b8d60);
+            
+        
+
+        circle_marker_2640603aba4d862b07903ad5bf89b984.bindPopup(popup_747ad794d6657d51820cc1d843ee06ec)
+        ;
+
+        
+    
+    
+            circle_marker_2640603aba4d862b07903ad5bf89b984.bindTooltip(
+                `<div>
+                     🏆 TOP 11: 연남동(홍대)<br>📊 적합도: 32.6점<br>🌙 야간유동: 1,698,353명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1823be46f5670955c6ca30b76f83db0e = L.circleMarker(
+                [37.5317, 126.8456],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.80672319341922, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_bf2c8572dd0735588e3fef3fbcf947ff = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_519b53f8e30ac8cae78d9a5f3b5fe49f = $(`<div id="html_519b53f8e30ac8cae78d9a5f3b5fe49f" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 12: 까치산역 3번         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 32.0점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,810,916명<br>                 💰 <b>한식매출:</b> 41.0억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 173억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>71점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>1점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>2점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>49점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_bf2c8572dd0735588e3fef3fbcf947ff.setContent(html_519b53f8e30ac8cae78d9a5f3b5fe49f);
+            
+        
+
+        circle_marker_1823be46f5670955c6ca30b76f83db0e.bindPopup(popup_bf2c8572dd0735588e3fef3fbcf947ff)
+        ;
+
+        
+    
+    
+            circle_marker_1823be46f5670955c6ca30b76f83db0e.bindTooltip(
+                `<div>
+                     🏆 TOP 12: 까치산역 3번<br>📊 적합도: 32.0점<br>🌙 야간유동: 1,810,916명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_df33468ba27e1c387137487b4d575575 = L.circleMarker(
+                [37.5409, 126.971],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.352004488159594, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_25d053eaa59176e6a98d1ee21fa23da9 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_aabffd100faf4c8394203e9ed031c355 = $(`<div id="html_aabffd100faf4c8394203e9ed031c355" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 13: 남영동 먹자골목         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 30.9점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 60,451명<br>                 💰 <b>한식매출:</b> 145.4억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 271억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>0점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>85점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>3점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>37점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_25d053eaa59176e6a98d1ee21fa23da9.setContent(html_aabffd100faf4c8394203e9ed031c355);
+            
+        
+
+        circle_marker_df33468ba27e1c387137487b4d575575.bindPopup(popup_25d053eaa59176e6a98d1ee21fa23da9)
+        ;
+
+        
+    
+    
+            circle_marker_df33468ba27e1c387137487b4d575575.bindTooltip(
+                `<div>
+                     🏆 TOP 13: 남영동 먹자골목<br>📊 적합도: 30.9점<br>🌙 야간유동: 60,451명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_75e71f0af2b73ff2037a30840f18cf3b = L.circleMarker(
+                [37.4816, 126.8827],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.307622246947133, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_1215c72fc20f9155991416f6032f5097 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ca576f5b79d678e565aadd7f242d5bb8 = $(`<div id="html_ca576f5b79d678e565aadd7f242d5bb8" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 14: 가산디지털단지         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 30.8점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 298,042명<br>                 💰 <b>한식매출:</b> 357.5억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 7572억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>10점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>43점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>73점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>9점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_1215c72fc20f9155991416f6032f5097.setContent(html_ca576f5b79d678e565aadd7f242d5bb8);
+            
+        
+
+        circle_marker_75e71f0af2b73ff2037a30840f18cf3b.bindPopup(popup_1215c72fc20f9155991416f6032f5097)
+        ;
+
+        
+    
+    
+            circle_marker_75e71f0af2b73ff2037a30840f18cf3b.bindTooltip(
+                `<div>
+                     🏆 TOP 14: 가산디지털단지<br>📊 적합도: 30.8점<br>🌙 야간유동: 298,042명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7821ff3620ee7c6f3a3e24e23050eeae = L.circleMarker(
+                [37.6378, 127.0257],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.246409162912922, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_2876c712cfaf9bd073b524b53602c170 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_3cbec36fe6ff01812ce17a6f48d228bf = $(`<div id="html_3cbec36fe6ff01812ce17a6f48d228bf" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 15: 수유역         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 30.6점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,505,452명<br>                 💰 <b>한식매출:</b> 185.7억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 1108억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>59점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>4점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>11점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>49점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_2876c712cfaf9bd073b524b53602c170.setContent(html_3cbec36fe6ff01812ce17a6f48d228bf);
+            
+        
+
+        circle_marker_7821ff3620ee7c6f3a3e24e23050eeae.bindPopup(popup_2876c712cfaf9bd073b524b53602c170)
+        ;
+
+        
+    
+    
+            circle_marker_7821ff3620ee7c6f3a3e24e23050eeae.bindTooltip(
+                `<div>
+                     🏆 TOP 15: 수유역<br>📊 적합도: 30.6점<br>🌙 야간유동: 1,505,452명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_95fe39659bc3c58d019989feb816cabd = L.circleMarker(
+                [37.4844, 126.9298],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.149073769678381, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_f17ae46c5be51b37fae8247a9d171be1 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_e70e1bd152d45091d78d4ca87aec77d9 = $(`<div id="html_e70e1bd152d45091d78d4ca87aec77d9" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 16: 신림역(신림)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 30.4점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,545,089명<br>                 💰 <b>한식매출:</b> 107.8억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 578억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>60점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>2점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>6점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>54점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_f17ae46c5be51b37fae8247a9d171be1.setContent(html_e70e1bd152d45091d78d4ca87aec77d9);
+            
+        
+
+        circle_marker_95fe39659bc3c58d019989feb816cabd.bindPopup(popup_f17ae46c5be51b37fae8247a9d171be1)
+        ;
+
+        
+    
+    
+            circle_marker_95fe39659bc3c58d019989feb816cabd.bindTooltip(
+                `<div>
+                     🏆 TOP 16: 신림역(신림)<br>📊 적합도: 30.4점<br>🌙 야간유동: 1,545,089명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8f794a08f5adbc7d18fa5e5dbee346d0 = L.circleMarker(
+                [37.5158, 126.9076],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.097691110770956, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_1a6787672aa5f439ef0d2c4cc0d5615c = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c23c7a0e07cdc5e9bf7580ab4d552f26 = $(`<div id="html_c23c7a0e07cdc5e9bf7580ab4d552f26" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 17: 영등포역(영등포)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 30.2점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,286,921명<br>                 💰 <b>한식매출:</b> 331.5억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 1445억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>50점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>9점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>14점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>55점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_1a6787672aa5f439ef0d2c4cc0d5615c.setContent(html_c23c7a0e07cdc5e9bf7580ab4d552f26);
+            
+        
+
+        circle_marker_8f794a08f5adbc7d18fa5e5dbee346d0.bindPopup(popup_1a6787672aa5f439ef0d2c4cc0d5615c)
+        ;
+
+        
+    
+    
+            circle_marker_8f794a08f5adbc7d18fa5e5dbee346d0.bindTooltip(
+                `<div>
+                     🏆 TOP 17: 영등포역(영등포)<br>📊 적합도: 30.2점<br>🌙 야간유동: 1,286,921명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_185da8a3e66b530dcdd4ac7b439562fb = L.circleMarker(
+                [37.5547, 126.9062],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.732626269631519, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_e784ed3d9ec436056d04e0ec109233f7 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_93829411af379868f8732e140d54d96c = $(`<div id="html_93829411af379868f8732e140d54d96c" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 18: 망리단길         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 29.3점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,496,241명<br>                 💰 <b>한식매출:</b> 52.1억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 148억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>59점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>1점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>1점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>59점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_e784ed3d9ec436056d04e0ec109233f7.setContent(html_93829411af379868f8732e140d54d96c);
+            
+        
+
+        circle_marker_185da8a3e66b530dcdd4ac7b439562fb.bindPopup(popup_e784ed3d9ec436056d04e0ec109233f7)
+        ;
+
+        
+    
+    
+            circle_marker_185da8a3e66b530dcdd4ac7b439562fb.bindTooltip(
+                `<div>
+                     🏆 TOP 18: 망리단길<br>📊 적합도: 29.3점<br>🌙 야간유동: 1,496,241명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8ef5d353310b820bcc5f9a093f112a97 = L.circleMarker(
+                [37.582, 126.9996],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.662578792581504, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_ce05ae1f0682ae9a86fc42d3041a046d = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_9e58dd5c4e3a6f2095930f63ba2902e5 = $(`<div id="html_9e58dd5c4e3a6f2095930f63ba2902e5" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 19: 대학로(혜화역)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 29.2점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,359,708명<br>                 💰 <b>한식매출:</b> 147.2억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 551억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>53점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>4점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>5점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>62점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_ce05ae1f0682ae9a86fc42d3041a046d.setContent(html_9e58dd5c4e3a6f2095930f63ba2902e5);
+            
+        
+
+        circle_marker_8ef5d353310b820bcc5f9a093f112a97.bindPopup(popup_ce05ae1f0682ae9a86fc42d3041a046d)
+        ;
+
+        
+    
+    
+            circle_marker_8ef5d353310b820bcc5f9a093f112a97.bindTooltip(
+                `<div>
+                     🏆 TOP 19: 대학로(혜화역)<br>📊 적합도: 29.2점<br>🌙 야간유동: 1,359,708명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3689a9469c29e34907557ee9e19c35d7 = L.circleMarker(
+                [37.6108, 126.9329],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.347981584190611, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_62b1d3f5773ac0eb84a18570d31a65d4 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_3242b28ece92b0d3aa213040f26ba2bb = $(`<div id="html_3242b28ece92b0d3aa213040f26ba2bb" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 20: 불광역 7번         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 28.4점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,108,867명<br>                 💰 <b>한식매출:</b> 16.2억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 38억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>43점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>1점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>0점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>100점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_62b1d3f5773ac0eb84a18570d31a65d4.setContent(html_3242b28ece92b0d3aa213040f26ba2bb);
+            
+        
+
+        circle_marker_3689a9469c29e34907557ee9e19c35d7.bindPopup(popup_62b1d3f5773ac0eb84a18570d31a65d4)
+        ;
+
+        
+    
+    
+            circle_marker_3689a9469c29e34907557ee9e19c35d7.bindTooltip(
+                `<div>
+                     🏆 TOP 20: 불광역 7번<br>📊 적합도: 28.4점<br>🌙 야간유동: 1,108,867명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8842c05b967ba01ab42f45f02e0ea62e = L.circleMarker(
+                [37.5044, 127.049],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.138553300960101, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_ad862e158745177bb9d47c535031fb95 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_6374f9c9a480e5a85cfa23821a9923ff = $(`<div id="html_6374f9c9a480e5a85cfa23821a9923ff" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 21: 선릉역         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 27.8점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,475,264명<br>                 💰 <b>한식매출:</b> 319.5억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 1277억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>58점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>8점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>12점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>15점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_ad862e158745177bb9d47c535031fb95.setContent(html_6374f9c9a480e5a85cfa23821a9923ff);
+            
+        
+
+        circle_marker_8842c05b967ba01ab42f45f02e0ea62e.bindPopup(popup_ad862e158745177bb9d47c535031fb95)
+        ;
+
+        
+    
+    
+            circle_marker_8842c05b967ba01ab42f45f02e0ea62e.bindTooltip(
+                `<div>
+                     🏆 TOP 21: 선릉역<br>📊 적합도: 27.8점<br>🌙 야간유동: 1,475,264명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d369954dfcb03950053398176d0390b9 = L.circleMarker(
+                [37.564, 126.9769],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.747855113423114, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_500b72992d0e556cef0a3a8ae08a32ac = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_0fc7213647aed558a2f0b873d23f59e3 = $(`<div id="html_0fc7213647aed558a2f0b873d23f59e3" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 22: 북창동(시청역_6번)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 26.9점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 258,844명<br>                 💰 <b>한식매출:</b> 465.3억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 712억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>8점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>64점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>7점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>20점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_500b72992d0e556cef0a3a8ae08a32ac.setContent(html_0fc7213647aed558a2f0b873d23f59e3);
+            
+        
+
+        circle_marker_d369954dfcb03950053398176d0390b9.bindPopup(popup_500b72992d0e556cef0a3a8ae08a32ac)
+        ;
+
+        
+    
+    
+            circle_marker_d369954dfcb03950053398176d0390b9.bindTooltip(
+                `<div>
+                     🏆 TOP 22: 북창동(시청역_6번)<br>📊 적합도: 26.9점<br>🌙 야간유동: 258,844명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0385475c0f69b61db3572897149a2253 = L.circleMarker(
+                [37.4865, 126.9817],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.673360910603481, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_be50ee8468e40ea0262f95ee83e3547a = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_69a3c069851a3092c424c5cc8768562c = $(`<div id="html_69a3c069851a3092c424c5cc8768562c" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 23: 총신대입구역(이수, 총신대)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 26.7점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,254,084명<br>                 💰 <b>한식매출:</b> 143.8억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 742억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>49점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>4점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>7점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>46점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_be50ee8468e40ea0262f95ee83e3547a.setContent(html_69a3c069851a3092c424c5cc8768562c);
+            
+        
+
+        circle_marker_0385475c0f69b61db3572897149a2253.bindPopup(popup_be50ee8468e40ea0262f95ee83e3547a)
+        ;
+
+        
+    
+    
+            circle_marker_0385475c0f69b61db3572897149a2253.bindTooltip(
+                `<div>
+                     🏆 TOP 23: 총신대입구역(이수, 총신대)<br>📊 적합도: 26.7점<br>🌙 야간유동: 1,254,084명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_69e0a1997e3c3e7a0f13d92da6caba25 = L.circleMarker(
+                [37.5044, 127.0251],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.515929344253125, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_67bb6fc1e7525731ce461cf5135fd0e3 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_cca3e38fc0195be3a4fa07d906597dea = $(`<div id="html_cca3e38fc0195be3a4fa07d906597dea" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 24: 신논현역         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 26.3점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,205,699명<br>                 💰 <b>한식매출:</b> 259.3억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 1308억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>47점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>8점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>13점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>31점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_67bb6fc1e7525731ce461cf5135fd0e3.setContent(html_cca3e38fc0195be3a4fa07d906597dea);
+            
+        
+
+        circle_marker_69e0a1997e3c3e7a0f13d92da6caba25.bindPopup(popup_67bb6fc1e7525731ce461cf5135fd0e3)
+        ;
+
+        
+    
+    
+            circle_marker_69e0a1997e3c3e7a0f13d92da6caba25.bindTooltip(
+                `<div>
+                     🏆 TOP 24: 신논현역<br>📊 적합도: 26.3점<br>🌙 야간유동: 1,205,699명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_102df439e048a36c91b65e883b1f4675 = L.circleMarker(
+                [37.537, 127.1441],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.500895978931705, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_f3b2bbc1b1229c004289f56a99c158af = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_55337671f5b25290c8f4a15c25462da7 = $(`<div id="html_55337671f5b25290c8f4a15c25462da7" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 25: 길동역         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 26.3점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,336,992명<br>                 💰 <b>한식매출:</b> 117.8억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 522억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>52점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>3점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>5점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>38점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_f3b2bbc1b1229c004289f56a99c158af.setContent(html_55337671f5b25290c8f4a15c25462da7);
+            
+        
+
+        circle_marker_102df439e048a36c91b65e883b1f4675.bindPopup(popup_f3b2bbc1b1229c004289f56a99c158af)
+        ;
+
+        
+    
+    
+            circle_marker_102df439e048a36c91b65e883b1f4675.bindTooltip(
+                `<div>
+                     🏆 TOP 25: 길동역<br>📊 적합도: 26.3점<br>🌙 야간유동: 1,336,992명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_121e1e2f18f4b915e251d4ee4dd7d5dc = L.circleMarker(
+                [37.5, 127.0364],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.29505028876968, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_a7430ba680b22c577c0c760c7ec33bf5 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_3e2769d7f7222bae616a9e105388ef75 = $(`<div id="html_3e2769d7f7222bae616a9e105388ef75" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 26: 역삼역         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 25.7점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,270,487명<br>                 💰 <b>한식매출:</b> 356.2억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 1438억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>49점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>10점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>14점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>10점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_a7430ba680b22c577c0c760c7ec33bf5.setContent(html_3e2769d7f7222bae616a9e105388ef75);
+            
+        
+
+        circle_marker_121e1e2f18f4b915e251d4ee4dd7d5dc.bindPopup(popup_a7430ba680b22c577c0c760c7ec33bf5)
+        ;
+
+        
+    
+    
+            circle_marker_121e1e2f18f4b915e251d4ee4dd7d5dc.bindTooltip(
+                `<div>
+                     🏆 TOP 26: 역삼역<br>📊 적합도: 25.7점<br>🌙 야간유동: 1,270,487명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b3db6c6c402f6a99010b98133f3773b0 = L.circleMarker(
+                [37.5213, 126.9245],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.286105449512114, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_60ddf730d53c7a1233d18de54f71f100 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_827125b6b9e5603b0cacb40af437bed1 = $(`<div id="html_827125b6b9e5603b0cacb40af437bed1" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 27: 여의도역(여의도)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 25.7점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 417,519명<br>                 💰 <b>한식매출:</b> 570.5억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 1851억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>15점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>49점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>18점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>11점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_60ddf730d53c7a1233d18de54f71f100.setContent(html_827125b6b9e5603b0cacb40af437bed1);
+            
+        
+
+        circle_marker_b3db6c6c402f6a99010b98133f3773b0.bindPopup(popup_60ddf730d53c7a1233d18de54f71f100)
+        ;
+
+        
+    
+    
+            circle_marker_b3db6c6c402f6a99010b98133f3773b0.bindTooltip(
+                `<div>
+                     🏆 TOP 27: 여의도역(여의도)<br>📊 적합도: 25.7점<br>🌙 야간유동: 417,519명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d3e7cbff47e10b38f76ba1726c20b795 = L.circleMarker(
+                [37.4813, 126.9527],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.237239681211559, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_35fd4604739003f66d0311238f202970 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_914dbf4815c9d8aae0508720b2d1f0ea = $(`<div id="html_914dbf4815c9d8aae0508720b2d1f0ea" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 28: 서울대입구역         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 25.6점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,179,961명<br>                 💰 <b>한식매출:</b> 126.1억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 709억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>46점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>4점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>7점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>46점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_35fd4604739003f66d0311238f202970.setContent(html_914dbf4815c9d8aae0508720b2d1f0ea);
+            
+        
+
+        circle_marker_d3e7cbff47e10b38f76ba1726c20b795.bindPopup(popup_35fd4604739003f66d0311238f202970)
+        ;
+
+        
+    
+    
+            circle_marker_d3e7cbff47e10b38f76ba1726c20b795.bindTooltip(
+                `<div>
+                     🏆 TOP 28: 서울대입구역<br>📊 적합도: 25.6점<br>🌙 야간유동: 1,179,961명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6abb784c4cc97397ee8600139868f835 = L.circleMarker(
+                [37.4942, 127.0134],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.222742051902197, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_a8c205e3f9e9e831b6e96ae533ced427 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_601249ebea05d9438275c1a866fa0ccd = $(`<div id="html_601249ebea05d9438275c1a866fa0ccd" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 29: 교대역(법원.검찰청)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 25.6점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,282,528명<br>                 💰 <b>한식매출:</b> 326.3억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 1084억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>50점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>9점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>10점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>14점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_a8c205e3f9e9e831b6e96ae533ced427.setContent(html_601249ebea05d9438275c1a866fa0ccd);
+            
+        
+
+        circle_marker_6abb784c4cc97397ee8600139868f835.bindPopup(popup_a8c205e3f9e9e831b6e96ae533ced427)
+        ;
+
+        
+    
+    
+            circle_marker_6abb784c4cc97397ee8600139868f835.bindTooltip(
+                `<div>
+                     🏆 TOP 29: 교대역(법원.검찰청)<br>📊 적합도: 25.6점<br>🌙 야간유동: 1,282,528명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_30e7174230c01da97db54bfe3264bbd6 = L.circleMarker(
+                [37.5405, 127.0705],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.171585600069506, "stroke": true, "weight": 2}
+            ).addTo(map_841f4f0e4b9b73f68f13f07a47596d13);
+        
+    
+        var popup_e3867d69af2a000f108d4ea6cea29d46 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_8191a6549dc336953a24e3ca8754d544 = $(`<div id="html_8191a6549dc336953a24e3ca8754d544" style="width: 100.0%; height: 100.0%;">     <div style="width: 320px; font-family: Arial, sans-serif;">         <h3 style="color: #d32f2f; margin: 5px 0; text-align: center;">             🍖 TOP 30: 건대입구역(건대)         </h3>         <hr style="margin: 8px 0;">          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);                      color: white; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">             <h4 style="margin: 0 0 5px 0; font-size: 14px;">📊 곱창집 적합도 점수</h4>             <div style="font-size: 24px; font-weight: bold;">                 25.4점             </div>         </div>          <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 13px;">🔍 핵심 지표</h4>             <div style="font-size: 12px; line-height: 1.6;">                 🌙 <b>야간유동인구:</b> 1,030,627명<br>                 💰 <b>한식매출:</b> 171.2억원<br>                 🏪 <b>한식점포:</b> 1개<br>                 📊 <b>상권활성도:</b> 784억원             </div>         </div>          <div style="background: #e3f2fd; padding: 8px; border-radius: 6px; margin: 8px 0;">             <h4 style="color: #1976d2; margin: 0 0 6px 0; font-size: 12px;">⭐ 세부 점수 (0-100점)</h4>             <div style="font-size: 11px; line-height: 1.4;">                 <div style="display: flex; justify-content: space-between;">                     <span>T1(야간유동):</span> <b>40점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>T2(매출밀도):</span> <b>6점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C1(경쟁우위):</span> <b>27점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>C2(상권활성):</span> <b>8점</b>                 </div>                 <div style="display: flex; justify-content: space-between;">                     <span>E1(주류친화):</span> <b>56점</b>                 </div>             </div>         </div>          <div style="text-align: center; font-size: 10px; color: #666; margin-top: 8px;">             💡 클릭하여 상세 정보 확인         </div>     </div>     </div>`)[0];
+                popup_e3867d69af2a000f108d4ea6cea29d46.setContent(html_8191a6549dc336953a24e3ca8754d544);
+            
+        
+
+        circle_marker_30e7174230c01da97db54bfe3264bbd6.bindPopup(popup_e3867d69af2a000f108d4ea6cea29d46)
+        ;
+
+        
+    
+    
+            circle_marker_30e7174230c01da97db54bfe3264bbd6.bindTooltip(
+                `<div>
+                     🏆 TOP 30: 건대입구역(건대)<br>📊 적합도: 25.4점<br>🌙 야간유동: 1,030,627명
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

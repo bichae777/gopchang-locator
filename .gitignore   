@@ -1,0 +1,151 @@
+# ===========================================
+# 곱창집 입지 분석 프로젝트 .gitignore
+# ===========================================
+
+# ── 데이터 파일 (대용량 제외)
+/data/**/*
+!/data/README.md              # 폴더 존재 보장용
+!/data/**/.gitkeep            # 빈 폴더 보존
+
+# 특정 대용량 파일 제외
+*.gpkg
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.sbn
+*.sbx
+*.fbn
+*.fbx
+*.ain
+*.aih
+*.ixs
+*.mxs
+*.atx
+*.xml
+
+# ── Python 환경
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ── 가상환경
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+
+# ── Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+*.ipynb
+
+# Jupyter auto-generated files
+*.log
+.jupyter/
+
+# ── IDE 설정
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS 생성 파일
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ── 임시 파일
+*.tmp
+*.temp
+*.cache
+
+# ── 민감한 정보
+config.ini
+secrets.json
+api_keys.txt
+*.key
+*.pem
+*.p12
+*.pfx
+
+# ── 로그 파일
+*.log
+logs/
+log/
+
+# ── 백업 파일
+*.bak
+*.backup
+*~
+
+# ── 압축 파일 (원본 데이터)
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tgz
+
+# ── Excel 임시 파일
+~$*.xlsx
+~$*.xls
+*.xlsm
+
+# ── 산출물 (docs 제외)
+output/
+results/
+exports/
+
+# ── 분석 중간 결과물
+temp_analysis/
+scratch/
+test_data/
+
+# ── API 응답 캐시
+cache/
+.cache/
+*.cache
+
+# ── 지도 타일 캐시
+tiles/
+basemaps/
+
+# ── 기타
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.pytest_cache/
+cover/
