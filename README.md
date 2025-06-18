@@ -41,15 +41,17 @@ gopchang-locator/
 ├── env.yml                  # Conda 환경 설정
 ├── .gitignore               # Git 추적 제외 파일
 │
-├── notebooks/               # Jupyter 노트북 (데이터 수집, EDA, 통합, 분석 단계별 노트북 다수 포함)
-│   ├── 00_eda_night_window.ipynb        # 야간 시간대 정의 EDA
-│   ├── 01_fetch_openapi.ipynb           # 서울 열린데이터 수집
-│   ├── 02_master_build.ipynb            # 통합 데이터셋 구축
-│   ├── 03_flow_pop_vs_sales.ipynb       # 유동·거주 인구 vs 매출 상관분석
-│   ├── 04_score_calculation.ipynb       # KPI 지표 계산 및 스코어링
-│   ├── 05_map_visualization.ipynb       # 입지 분석 맵 시각화
-│   └── 기타 분석 단계별 노트북           # 추가 EDA, 가설검증, 보고서용 시각화 등
-│
+├── notebooks/               # Jupyter 노트북
+│   ├── .ipynb_checkpoints/               # 자동 저장 체크포인트
+│   ├── 00_eda_night_window.ipynb          # 야간 시간대 정의 EDA
+│   ├── 02-1_data_cleaning.ipynb           # 데이터 정제 및 전처리
+│   ├── 02_master_build.ipynb              # 통합 마스터 데이터셋 구축
+│   ├── 03-1_kpi_scoring_fixed.ipynb       # KPI 채점(고정 기준)
+│   ├── 03_kpi_scoring_gopchang.ipynb      # 곱창집 특화 KPI 스코어링
+│   ├── 04_map_visualization_fixed.ipynb   # 입지 분석 지도 시각화(수정본)
+│   ├── 05_top10_detailed_analysis.ipynb   # 상위 10개 상권 상세 분석
+│   ├── 06_final_report.ipynb              # 최종 보고서 생성
+│   └── 07_simple_dashboard.ipynb          # 간단 대시보드 제작
 ├── data/                    # 데이터 저장소
 ├── scripts/                 # 재실행 가능한 스크립트
 └── docs/                    # 보고서 및 산출물
